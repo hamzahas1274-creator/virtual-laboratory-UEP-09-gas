@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Lab SETS - Usaha, Energi & Pesawat Sederhana</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #111827;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary-emerald: #10b981;
+      --primary-cyan: #06b6d4;
+      --sets-science: #38bdf8;
+      --sets-env: #34d399;
+      --sets-tech: #fbbf24;
+      --sets-society: #f472b6;
+      --text-main: #f9fafb;
+      --text-sub: #9ca3af;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: var(--text-main);
+    }
+
+    /* Container Card Utama */
+    .sets-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .sets-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    /* Header Info */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .badge-sets {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .target-class {
+      font-size: 12px;
+      color: #a7f3d0;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .sets-card h2 {
+      font-size: 22px;
+      margin: 0 0 6px 0;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .sets-card p.subtitle {
+      color: var(--text-sub);
+      font-size: 13px;
+      margin: 0 0 18px 0;
+      line-height: 1.5;
+    }
+
+    /* Empat Pilar SETS Grid Indicator */
+    .sets-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pillar-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pillar-box.science { color: var(--sets-science); border-top: 3px solid var(--sets-science); }
+    .pillar-box.env { color: var(--sets-env); border-top: 3px solid var(--sets-env); }
+    .pillar-box.tech { color: var(--sets-tech); border-top: 3px solid var(--sets-tech); }
+    .pillar-box.society { color: var(--sets-society); border-top: 3px solid var(--sets-society); }
+
+    /* Box Ringkasan Sains & Rumus */
+    .theory-card {
+      background: rgba(31, 41, 55, 0.6);
+      border-left: 4px solid var(--primary-cyan);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .theory-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-cyan);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theory-desc {
+      font-size: 12px;
+      color: #d1d5db;
+      line-height: 1.5;
+      margin: 0 0 10px 0;
+    }
+
+    .formula-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .formula-tag {
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #7dd3fc;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    /* Target Berpikir Kritis (Critical Thinking Skills) */
+    .critical-thinking-box {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+    }
+
+    .ct-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .ct-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .ct-item:last-child { margin-bottom: 0; }
+    .ct-icon { color: var(--primary-emerald); }
+
+    /* Meta Info */
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .meta-row span { color: var(--text-sub); }
+    .meta-row strong { color: var(--text-main); }
+
+    /* Tombol Aksi */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-emerald), var(--primary-cyan));
+      color: #042f2e;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-sub);
+      border: 1px solid var(--card-border);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sets-card">
+    
+    <!-- Top Header -->
+    <div class="card-header">
+      <span class="badge-sets">🌱 Virtual Lab SETS</span>
+      <span class="target-class">Kelas VIII MTsN 2 Nganjuk</span>
+    </div>
+
+    <!-- Title -->
+    <h2>Usaha, Energi, & Pesawat Sederhana</h2>
+    <p class="subtitle">Analisis penerapan sains, teknologi, dan dampaknya terhadap lingkungan serta masyarakat sekitar.</p>
+
+    <!-- 4 Pilar SETS -->
+    <div class="sets-pillars">
+      <div class="pillar-box science">🔬 Science</div>
+      <div class="pillar-box env">🍃 Environment</div>
+      <div class="pillar-box tech">⚙️ Tech</div>
+      <div class="pillar-box society">👥 Society</div>
+    </div>
+
+    <!-- Ringkasan Materi & Rumus Inti -->
+    <div class="theory-card">
+      <div class="theory-header">💡 Konsep Inti Sains:</div>
+      <p class="theory-desc">
+        Usaha (W) terjadi saat gaya (F) memindahkan benda (s). Pesawat sederhana membantu efisiensi usaha dengan memberikan Keuntungan Mekanis ($KM$).
+      </p>
+      <div class="formula-group">
+        <span class="formula-tag">W = F × s</span>
+        <span class="formula-tag">Ek = ½ m v²</span>
+        <span class="formula-tag">Ep = m g h</span>
+        <span class="formula-tag">KM = W / F</span>
+      </div>
+    </div>
+
+    <!-- Indikator Berpikir Kritis -->
+    <div class="critical-thinking-box">
+      <div class="ct-title">🎯 Misi Berpikir Kritis:</div>
+      <div class="ct-item">
+        <span class="ct-icon">🔍</span> <strong>Analisis:</strong> Membandingkan efisiensi katrol & bidang miring.
+      </div>
+      <div class="ct-item">
+        <span class="ct-icon">🧩</span> <strong>Evaluasi:</strong> Dampak teknologi alat angkut terhadap lingkungan.
+      </div>
+      <div class="ct-item">
+        <span class="ct-icon">💡</span> <strong>Inferensi:</strong> Solusi pesawat sederhana ramah lingkungan di masyarakat.
+      </div>
+    </div>
+
+    <!-- Metadata -->
+    <div class="meta-row">
+      <span>⏱️ Durasi: <strong>2x40 Menit</strong></span>
+      <span>📊 Mode: <strong>Eksperimen SETS</strong></span>
+    </div>
+
+    <!-- Tombol Aksi -->
+    <div class="btn-container">
+      <button class="btn-primary">
+        <span>🚀 Mulai Simulasi Interaktif</span>
+      </button>
+      <button class="btn-secondary">
+        📖 Baca Panduan Pendekatan SETS
+      </button>
+    </div>
+
+  </div>
+
+</body>
+</html>
